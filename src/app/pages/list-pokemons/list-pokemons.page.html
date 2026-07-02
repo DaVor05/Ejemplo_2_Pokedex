@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>list-pokemons</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">list-pokemons</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    @for(pokemon of pokemons; track pokemon) {
+      <ion-card>
+        <ion-card-content>
+          <ion-row class="ion-align-items-center">
+            
+            <ion-col size="3">
+              <ion-img [src]="pokemon.sprite" />
+            </ion-col>
+            
+            <ion-col size="4">
+              <ion-text class="ion-text-capitalize pokemon-name">
+                {{ pokemon.name }}
+              </ion-text>
+            </ion-col>
+            
+            <ion-col size="5" style="display: flex; gap: 6px; justify-content: flex-end;">
+              
+              <ion-badge [class]="'badge-' + pokemon.type1" class="ion-text-uppercase">
+                {{ listaTipos[pokemon.type1] || pokemon.type1 }}
+              </ion-badge>
+              
+              @if (pokemon.type2) {
+                <ion-badge [class]="'badge-' + pokemon.type2" class="ion-text-uppercase">
+                  {{ listaTipos[pokemon.type2] || pokemon.type2 }}
+                </ion-badge>
+              }
+              
+            </ion-col>
+            
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    }
+  </ion-grid>
+</ion-content>

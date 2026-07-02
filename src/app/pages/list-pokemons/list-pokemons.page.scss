@@ -1,0 +1,37 @@
+/* Tipografía y bordes para los Badges estilo Retro */
+ion-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;          /* Tamaño pequeño tipo píxel */
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: 2px solid #000000;   /* El contorno negro del ejemplo */
+  box-shadow: 1px 1px 0px #000000; /* Pequeña sombra rígida */
+  color: #ffffff !important;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* Colores de fondo basados en el diseño del ejemplo */
+.badge-grass    { --background: #4A9641; }
+.badge-poison   { --background: #A040A0; }
+.badge-fire     { --background: #E66D2E; }
+.badge-water    { --background: #4A73DC; }
+.badge-bug      { --background: #A8B820; }
+.badge-normal   { --background: #A8A878; }
+.badge-electric { --background: #F8D030; color: #000000 !important; text-shadow: none; }
+.badge-ground   { --background: #E0C068; }
+.badge-fairy    { --background: #EE99AC; }
+.badge-fighting { --background: #C03028; }
+.badge-psychic  { --background: #F85888; }
+.badge-rock     { --background: #B8A038; }
+.badge-ghost    { --background: #705898; }
+.badge-ice      { --background: #98D8D8; }
+.badge-dragon   { --background: #7038F8; }
+.badge-dark     { --background: #705746; }
+.badge-steel    { --background: #B8B8D0; }
+.badge-flying   { --background: #A890F0; }
+
+/* Opcional: Estilo retro también para el nombre del Pokémon */
+.pokemon-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+}

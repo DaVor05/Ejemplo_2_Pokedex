@@ -1,13 +1,118 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>detail-pokemon</ion-title>
+    <ion-title class="ion-text-capitalize">
+      {{ pokemon ? pokemon.name : 'Cargando...' }}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">detail-pokemon</ion-title>
+      <ion-title size="large" class="ion-text-capitalize">
+        {{ pokemon ? pokemon.name : 'Detalle' }}
+      </ion-title>
     </ion-toolbar>
   </ion-header>
+
+  @if (pokemon) {
+    <div class="ion-text-center ion-padding">
+      <ion-img [src]="pokemon.sprite" style="max-width: 150px; margin: 0 auto;"></ion-img>
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información Básica</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label><strong>Nombre:</strong></ion-label>
+            <ion-text slot="end" class="ion-text-capitalize">{{ pokemon.name }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label><strong>Altura:</strong></ion-label>
+            <ion-text slot="end">{{ pokemon.height }} dm</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label><strong>Peso:</strong></ion-label>
+            <ion-text slot="end">{{ pokemon.weight }} hg</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label><strong>Tipos:</strong></ion-label>
+            <div slot="end" style="display: flex; gap: 6px;">
+              <ion-badge [class]="'badge-' + pokemon.type1" class="ion-text-uppercase">
+                {{ listaTipos[pokemon.type1] || pokemon.type1 }}
+              </ion-badge>
+              @if (pokemon.type2) {
+                <ion-badge [class]="'badge-' + pokemon.type2" class="ion-text-uppercase">
+                  {{ listaTipos[pokemon.type2] || pokemon.type2 }}
+                </ion-badge>
+              }
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Habilidades</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="inset">
+          @for (ability of pokemon.abilities; track ability) {
+            <ion-item>
+              <ion-icon name="star-outline" slot="start" style="font-size: 18px; color: #f0b429;"></ion-icon>
+              <ion-label class="ion-text-capitalize">{{ ability }}</ion-label>
+              <ion-badge color="primary" slot="end">Normal</ion-badge>
+            </ion-item>
+          }
+          @if (pokemon.hiddenAbility) {
+            <ion-item>
+              <ion-icon name="star-outline" slot="start" style="font-size: 18px; color: #cb2424;"></ion-icon>
+              <ion-label class="ion-text-capitalize">{{ pokemon.hiddenAbility }}</ion-label>
+              <ion-badge color="danger" slot="end">Oculta</ion-badge>
+            </ion-item>
+          }
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Estadísticas</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none">
+          @for (stat of pokemon.stats; track stat) {
+            <ion-item>
+              <div style="width: 100%;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                  <ion-text><strong>{{ listaStats[stat.name] || stat.name }}</strong></ion-text>
+                  <ion-text color="medium"><strong>{{ stat.base_stat }}</strong></ion-text>
+                </div>
+                <ion-progress-bar 
+                  color="primary" 
+                  [value]="+stat.base_stat / 255">
+                </ion-progress-bar>
+              </div>
+            </ion-item>
+          }
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  } @else {
+    <div class="ion-text-center ion-padding" style="margin-top: 50px;">
+      <p>Cargando datos del Pokémon...</p>
+    </div>
+  }
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+    <ion-fab-button (click)="goBack()" color="light">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

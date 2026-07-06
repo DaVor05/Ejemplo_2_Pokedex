@@ -13,7 +13,7 @@
 
   <ion-grid>
     @for(pokemon of pokemons; track pokemon) {
-      <ion-card>
+      <ion-card (click)="goToPage(pokemon.id)" style="cursor: pointer;">
         <ion-card-content>
           <ion-row class="ion-align-items-center">
             
@@ -28,7 +28,6 @@
             </ion-col>
             
             <ion-col size="5" style="display: flex; gap: 6px; justify-content: flex-end;">
-              
               <ion-badge [class]="'badge-' + pokemon.type1" class="ion-text-uppercase">
                 {{ listaTipos[pokemon.type1] || pokemon.type1 }}
               </ion-badge>
@@ -38,7 +37,6 @@
                   {{ listaTipos[pokemon.type2] || pokemon.type2 }}
                 </ion-badge>
               }
-              
             </ion-col>
             
           </ion-row>
@@ -46,4 +44,12 @@
       </ion-card>
     }
   </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="getMorePokemons($event)">
+    <ion-infinite-scroll-content 
+      loadingSpinner="bubbles" 
+      loadingText="Cargando más pokémons...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
